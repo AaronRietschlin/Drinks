@@ -1,0 +1,13 @@
+<resources>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    
+    <!-- The width of the drawer layout -->
+    <dimen name="drawer_layout_width">240dp</dimen>
+
+    <!-- The height of the MapView when used in a content section (meaning there is content below it. -->
+    <dimen name="map_view_height">250dp</dimen>
+
+</resources>

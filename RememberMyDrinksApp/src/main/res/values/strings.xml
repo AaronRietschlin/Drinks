@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">RememberMyTab</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+
+    <!-- Note: WHEN YOU ADD TO THIS, ADD TO THE ARRAYS.XML FILE TOO! -->
+    <!-- This is the list of options available in the NavDrawer -->
+    <string name="drawer_list_night">Nights</string>
+    <string name="drawer_list_tab">Tabs</string>
+    <string name="drawer_list_drinks">Drinks</string>
+
+    <!-- ALL REMEMBER MY TAB STRINGS GO HERE -->
+    <string name="tab_setup_location">Location - Lat: %1$f; Lon: %2$f</string>
+
+    <!-- The list of Radius, in meters. Be sure to alter the values in arrays.xml if you alter these. -->
+    <string name="radius_5">5 meters</string>
+    <string name="radius_10">10 meters</string>
+    <string name="radius_20">20 meters</string>
+    <string name="radius_30">30 meters</string>
+    <string name="radius_50">50 meters</string>
+    <string name="radius_custom">Custom</string>
+
+    <!-- For the drawer accessibility -->
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+
+</resources>

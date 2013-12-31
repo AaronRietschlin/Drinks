@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="radius_options">
+        <item>@string/radius_5</item>
+        <item>@string/radius_10</item>
+        <item>@string/radius_20</item>
+        <item>@string/radius_30</item>
+        <item>@string/radius_50</item>
+        <item>@string/radius_custom</item>
+    </string-array>
+
+    <integer-array name="radius_values">
+        <item>5</item>
+        <item>10</item>
+        <item>20</item>
+        <item>30</item>
+        <item>50</item>
+        <item>-1</item>
+    </integer-array>
+
+    <!-- The array that makes up the drawer list -->
+    <string-array name="drawer_list">
+        <item>@string/drawer_list_night</item>
+        <item>@string/drawer_list_tab</item>
+        <item>@string/drawer_list_drinks</item>
+    </string-array>
+
+</resources>
