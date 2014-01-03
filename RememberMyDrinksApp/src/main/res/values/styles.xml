@@ -10,4 +10,29 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
 
+    <style name="AppTheme.Blue">
+        <item name="action_button">@style/Button.Action.Blue</item>
+    </style>
+
+    <style name="Text" />
+
+    <style name="Button" parent="android:TextAppearance.Holo" />
+
+    <style name="Button.Action">
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:minHeight">@dimen/btn_action_min_height</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="Button.Action.Negative">
+        <item name="android:background">@drawable/btn_action_negative_selector</item>
+    </style>
+
+    <style name="Button.Action.Blue">
+        <item name="android:background">@drawable/btn_action_blue_selector</item>
+    </style>
+
+
 </resources>

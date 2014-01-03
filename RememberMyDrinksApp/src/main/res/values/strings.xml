@@ -28,4 +28,9 @@
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
 
+    <!-- Tab strings -->
+    <string name="tabs_open_tab">Open Bar Tab At This Location</string>
+    <string name="tabs_close_tab">Close Tab</string>
+    <string name="tabs_recent">Recent Tabs</string>
+
 </resources>

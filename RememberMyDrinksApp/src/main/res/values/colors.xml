@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- This is the color of the button when an action is currently in progress (so clicking it once more will turn it to its default color. -->
+    <color name="action_button_negative">#E52F2F</color>
+    <color name="action_button_negative_selected">#AE1515</color>
+
+    <!-- Blue theme colors -->
+    <color name="action_button_blue">#00696D</color>
+    <color name="action_button_blue_selected">#ff005458</color>
+
+</resources>

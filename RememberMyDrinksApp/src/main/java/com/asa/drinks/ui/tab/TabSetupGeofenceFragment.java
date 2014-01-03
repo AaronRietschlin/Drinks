@@ -5,18 +5,11 @@ import android.content.Intent;
 import android.content.IntentSender;
 import android.graphics.Color;
 import android.location.Location;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.Button;
-import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.asa.drinks.R;
@@ -49,29 +42,31 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TabSetupGeofenceFragment extends AsaBaseFragment implements OnClickListener, OnItemSelectedListener, GooglePlayServicesClient.ConnectionCallbacks,
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+import butterknife.OnClick;
+
+public class TabSetupGeofenceFragment extends AsaBaseFragment implements GooglePlayServicesClient.ConnectionCallbacks,
         GooglePlayServicesClient.OnConnectionFailedListener, OnAddGeofencesResultListener {
     public static final String TAG = "TabSetupGeofenceFragment";
 
     public static final int DEFAULT_RADIUS = 5;
     public static final float DEFAULT_ZOOM = 16;
 
-    private TextView mTvLocation;
-    private Spinner mSpinnerRadius;
-    private Button mBtnSave;
-
     private LocationClient mLocationClient;
-    // Stores the PendingIntent used to request geofence monitoring
+    // Stores the PenCdingIntent used to request geofence monitoring
     private PendingIntent mGeofenceRequestIntent;
     private RequestType mRequestType;
     // Flag that indicates if a request is underway.
     private boolean mInProgress;
     private List<Geofence> mGeofenceList;
 
-    private int[] mSpinnerValues;
+    // Views
+    @InjectView(R.id.map_view)
+    MapView mMapView;
 
+    // Map stuff
     private GoogleMap mMap;
-    private MapView mMapView;
     private Circle mCurrentCircle;
     private MarkerOptions mCurrentMarkerOptions;
     private Marker mCurrentMarker;
@@ -95,14 +90,7 @@ public class TabSetupGeofenceFragment extends AsaBaseFragment implements OnClick
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_tab_setup_geofence, container, false);
-
-        mTvLocation = (TextView) v.findViewById(R.id.tab_setup_tv_location);
-        mSpinnerRadius = (Spinner) v.findViewById(R.id.tab_setup_spinner_radius);
-        mBtnSave = (Button) v.findViewById(R.id.tab_setup_button_save);
-        mMapView = (MapView) v.findViewById(R.id.map_view);
-
-        mBtnSave.setOnClickListener(this);
-        mSpinnerRadius.setOnItemSelectedListener(this);
+        ButterKnife.inject(this, v);
 
         return v;
     }
@@ -114,7 +102,6 @@ public class TabSetupGeofenceFragment extends AsaBaseFragment implements OnClick
         setupMap();
 
         mInProgress = false;
-        mSpinnerValues = getResources().getIntArray(R.array.radius_values);
         buildLocationClient();
     }
 
@@ -122,6 +109,8 @@ public class TabSetupGeofenceFragment extends AsaBaseFragment implements OnClick
         mMap = mMapView.getMap();
         mMap.setMyLocationEnabled(true);
         buildMapIfNeeded();
+
+        mMap.getUiSettings().setZoomControlsEnabled(false);
 
         mMap.setOnMapClickListener(new OnMapClickListener() {
             @Override
@@ -196,48 +185,6 @@ public class TabSetupGeofenceFragment extends AsaBaseFragment implements OnClick
         }
     }
 
-    @Override
-    public void onClick(View v) {
-        int vId = v.getId();
-        switch (vId) {
-            case R.id.tab_setup_button_save:
-                saveClicked();
-                break;
-        }
-    }
-
-    private void saveClicked() {
-        Location location = mLocationClient.getLastLocation();
-        if (location != null) {
-            new SaveGeofenceItemTask().execute(location);
-        }
-    }
-
-    private class SaveGeofenceItemTask extends AsyncTask<Location, Void, TabGeofenceItem> {
-
-        @Override
-        protected TabGeofenceItem doInBackground(Location... params) {
-            Location location = params[0];
-            int selectedRadiusPos = mSpinnerRadius.getSelectedItemPosition();
-            int radius = mSpinnerValues[selectedRadiusPos];
-            TabGeofenceItem item = new TabGeofenceItem(location, (float) radius, 0);
-//            item.save();
-            // TODO - save this
-            item.setGeofenceId();
-            item.computeIntentFlag();
-//            item.save();
-            // TODO - save this
-            mGeofenceList.add(item.toGeofence());
-            return item;
-        }
-
-        @Override
-        protected void onPostExecute(TabGeofenceItem item) {
-            addGeofence(item);
-        }
-
-    }
-
     private void buildMapIfNeeded() {
         try {
             MapsInitializer.initialize(mActivity);
@@ -278,7 +225,6 @@ public class TabSetupGeofenceFragment extends AsaBaseFragment implements OnClick
         }
         double lat = location.getLatitude();
         double lon = location.getLongitude();
-        mTvLocation.setText(getString(R.string.tab_setup_location, lat, lon));
 
         mCurrentLatLng = LocationUtils.locationToLatLng(location);
 
@@ -329,23 +275,6 @@ public class TabSetupGeofenceFragment extends AsaBaseFragment implements OnClick
     }
 
     @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        int radius = mSpinnerValues[position];
-        if (radius < 0) {
-            // Custom clicked
-            Toast.makeText(mActivity, "Custom Clicked", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        mCurrentRadius = radius;
-        drawCircle(mCurrentLatLng, mCurrentRadius, true);
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-        // Do nothing
-    }
-
-    @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
         mInProgress = false;
         if (connectionResult.hasResolution()) {
@@ -382,6 +311,10 @@ public class TabSetupGeofenceFragment extends AsaBaseFragment implements OnClick
         boolean added = LocationStatusCodes.SUCCESS == statusCode;
         Toast.makeText(mActivity, "Geofence Added: " + added, Toast.LENGTH_SHORT).show();
         mInProgress = false;
+    }
+
+    @OnClick(R.id.tabs_btn_action)
+    public void onOpenCloseTabClicked() {
     }
 
 }

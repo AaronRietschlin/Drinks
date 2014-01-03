@@ -10,4 +10,7 @@
     <!-- The height of the MapView when used in a content section (meaning there is content below it. -->
     <dimen name="map_view_height">250dp</dimen>
 
+    <!-- For the action buttons (the buttons on each one of the main pages that will perform some action. -->
+    <dimen name="btn_action_min_height">48dp</dimen>
+
 </resources>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- The individual items for the themes. -->
+    <!-- The button that is on each one of the pages that performs an action (i.e. Open tab, Track night, etc). -->
+    <attr name="action_button" format="reference" />
+
+</resources>

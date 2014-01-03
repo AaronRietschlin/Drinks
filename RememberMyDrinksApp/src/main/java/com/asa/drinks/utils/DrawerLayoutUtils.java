@@ -174,8 +174,13 @@ public class DrawerLayoutUtils {
         }
     }
 
+    /**
+     * Determines which Activity to open. Since we are using different themes for different parts of
+     * the application, we are using separate Activities (makes it easier).
+     *
+     * @param position
+     */
     public void selectItem(int position) {
-
         // Swap the fragment
         switch (position) {
             case POS_NIGHT:

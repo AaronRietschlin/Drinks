@@ -37,7 +37,8 @@
 
         <!-- TODO - Change the debuggable -->
         <activity
-            android:name="com.asa.drinks.ui.MainActivity"
+            android:name="com.asa.drinks.ui.tab.ActivityTab"
+            android:theme="@style/AppTheme.Blue"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
