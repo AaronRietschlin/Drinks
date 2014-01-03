@@ -12,9 +12,35 @@
 
     <style name="AppTheme.Blue">
         <item name="action_button">@style/Button.Action.Blue</item>
+        <item name="android:actionBarStyle">@style/ActionBarStyle.Blue</item>
+    </style>
+
+    <style name="AppTheme.Purple">
+        <item name="action_button">@style/Button.Action.Purple</item>
+        <item name="android:actionBarStyle">@style/ActionBarStyle.Purple</item>
+    </style>
+
+    <!-- END THEME OPTIONS -->
+
+    <style name="ActionBarStyle" parent="android:Widget.Holo.Light.ActionBar">
+        <item name="android:titleTextStyle">@style/Text.ActionBar.Title</item>
+    </style>
+
+    <style name="ActionBarStyle.Blue">
+        <item name="android:background">@color/bg_action_bar_blue</item>
+    </style>
+
+    <style name="ActionBarStyle.Purple">
+        <item name="android:background">@color/bg_action_bar_purple</item>
     </style>
 
     <style name="Text" />
+
+    <style name="Text.ActionBar" />
+
+    <style name="Text.ActionBar.Title" parent="android:TextAppearance.Holo.Widget.ActionBar.Title">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
 
     <style name="Button" parent="android:TextAppearance.Holo" />
 
@@ -32,6 +58,10 @@
 
     <style name="Button.Action.Blue">
         <item name="android:background">@drawable/btn_action_blue_selector</item>
+    </style>
+
+    <style name="Button.Action.Purple">
+        <item name="android:background">@drawable/btn_action_purple_selector</item>
     </style>
 
 

@@ -2,6 +2,7 @@ package com.asa.drinks.utils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -19,8 +20,8 @@ import android.widget.ListView;
 import com.asa.drinks.R;
 import com.asa.drinks.ui.AsaBaseActivity;
 import com.asa.drinks.ui.MainActivity;
-import com.asa.drinks.ui.night.FragmentNightHome;
-import com.asa.drinks.ui.tab.TabSetupGeofenceFragment;
+import com.asa.drinks.ui.night.ActivityNight;
+import com.asa.drinks.ui.tab.ActivityTab;
 
 public class DrawerLayoutUtils {
     private final static String TAG = LogUtils.makeLogTag(DrawerLayoutUtils.class);
@@ -67,7 +68,6 @@ public class DrawerLayoutUtils {
         mWithAbToggle = withActionBarToggle;
 
         mListOptions = mContext.getResources().getStringArray(R.array.drawer_list);
-        mTitle = mListOptions[0];
     }
 
     /**
@@ -181,16 +181,25 @@ public class DrawerLayoutUtils {
      * @param position
      */
     public void selectItem(int position) {
+        Intent activityIntent = null;
         // Swap the fragment
         switch (position) {
             case POS_NIGHT:
-                mActivity.replaceFragment(FragmentNightHome.newInstance(), FragmentNightHome.TAG, false, false);
+                activityIntent = new Intent(mActivity, ActivityNight.class);
                 break;
             case POS_TAB:
-                mActivity.replaceFragment(TabSetupGeofenceFragment.newInstance(), TabSetupGeofenceFragment.TAG, false, false);
+                activityIntent = new Intent(mActivity, ActivityTab.class);
                 break;
             case POS_DRINK:
                 break;
+        }
+
+        if (activityIntent != null) {
+            // TODO - add the position
+            activityIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+            mActivity.startActivity(activityIntent);
+            mActivity.finish();
         }
 
         mDrawerList.setSelection(position);
@@ -236,6 +245,24 @@ public class DrawerLayoutUtils {
 
     public void setTitle(int titleId, boolean setVar) {
         setTitle(mContext.getString(titleId), setVar);
+    }
+
+    /**
+     * Unlike {@link #setTitle(CharSequence, boolean)}, this one only sets the variable.
+     *
+     * @param title
+     */
+    public void setTitle(CharSequence title) {
+        mTitle = title;
+    }
+
+    /**
+     * Unlike {@link #setTitle(int, boolean)}, this one only sets the variable.
+     *
+     * @param titleId
+     */
+    public void setTitle(int titleId) {
+        mTitle = mContext.getString(titleId);
     }
 
     public void setCurrentPosition(int position) {

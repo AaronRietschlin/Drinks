@@ -4,5 +4,5 @@
     <!-- The individual items for the themes. -->
     <!-- The button that is on each one of the pages that performs an action (i.e. Open tab, Track night, etc). -->
     <attr name="action_button" format="reference" />
-
+    <attr name="action_bar_background" format="reference" />
 </resources>
