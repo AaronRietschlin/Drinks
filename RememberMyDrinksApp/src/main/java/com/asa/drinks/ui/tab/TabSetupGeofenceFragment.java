@@ -32,6 +32,7 @@ import com.google.android.gms.maps.GoogleMap.OnCameraChangeListener;
 import com.google.android.gms.maps.GoogleMap.OnMapClickListener;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
@@ -118,7 +119,7 @@ public class TabSetupGeofenceFragment extends AsaBaseFragment implements GoogleP
                 mCurrentLatLng = latLng;
                 mCurrentMarkerOptions = new MarkerOptions();
                 mMap.clear();
-                mCurrentMarkerOptions.position(latLng).title("Lat: " + latLng.latitude + "; Lng: " + latLng.longitude);
+                mCurrentMarkerOptions.position(latLng).title("Lat: " + latLng.latitude + "; Lng: " + latLng.longitude).icon(BitmapDescriptorFactory.defaultMarker(180F));
                 mCurrentMarkerOptions.snippet("Clicking save will create the Geofence around this spot!");
                 mCurrentMarker = mMap.addMarker(mCurrentMarkerOptions);
                 mCurrentMarker.showInfoWindow();
