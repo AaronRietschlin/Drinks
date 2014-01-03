@@ -24,6 +24,8 @@
         <item>@string/drawer_list_night</item>
         <item>@string/drawer_list_tab</item>
         <item>@string/drawer_list_drinks</item>
+        <item>@string/drawer_list_drink_list</item>
+        <item>@string/drawer_list_game_list</item>
     </string-array>
 
 </resources>
