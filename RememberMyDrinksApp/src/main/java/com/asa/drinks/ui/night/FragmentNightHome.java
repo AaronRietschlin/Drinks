@@ -14,6 +14,9 @@ import com.asa.drinks.R;
 import com.asa.drinks.model.contracts.DrinksContract.DrinkCountEntry;
 import com.asa.drinks.ui.AsaBaseFragment;
 
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 public class FragmentNightHome extends AsaBaseFragment {
 	public static final String TAG = "FragmentNightHome";
 	
@@ -30,7 +33,7 @@ public class FragmentNightHome extends AsaBaseFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.fragment_night_home, container, false);
-
+        ButterKnife.inject(this, v);
 		return v;
 	}
 
@@ -42,5 +45,10 @@ public class FragmentNightHome extends AsaBaseFragment {
 		Cursor cursor = cr.query(uri, null, null, null, null);
 		Log.d(TAG, "TEST");
 	}
+
+    @OnClick(R.id.night_btn_action)
+    public void onActionButtonClicked(){
+        
+    }
 
 }

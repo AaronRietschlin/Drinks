@@ -10,10 +10,10 @@
         android:layout_height="@dimen/map_view_height" />
 
     <TextView
-        style="?attr/action_button"
         android:id="@+id/tabs_btn_action"
+        style="?attr/action_button"
         android:layout_width="match_parent"
-        android:text="@string/tabs_open_tab"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="@string/tabs_open_tab" />
 
 </LinearLayout>
