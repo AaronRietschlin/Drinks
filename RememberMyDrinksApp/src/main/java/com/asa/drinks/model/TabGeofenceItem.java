@@ -1,6 +1,7 @@
 package com.asa.drinks.model;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.location.Location;
 
 import com.asa.drinks.AppData;
@@ -49,6 +50,16 @@ public class TabGeofenceItem extends BaseItem {
         } else {
             this.expirationTime = Geofence.NEVER_EXPIRE;
         }
+    }
+
+    public TabGeofenceItem(Location location, Context context) {
+        super();
+        latitude = location.getLatitude();
+        longitude = location.getLongitude();
+        // TODO - get default radius from preferences
+        // TODO - get default expiration time from preferences
+        this.radius = AppData.GEOFENCE_DEFAULT_RADIUS;
+        this.expirationTime = AppData.GEOFENCE_DEFAULT_EXPIRATION;
     }
 
     /**

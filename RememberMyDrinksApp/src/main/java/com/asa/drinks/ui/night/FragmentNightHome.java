@@ -18,37 +18,37 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class FragmentNightHome extends AsaBaseFragment {
-	public static final String TAG = "FragmentNightHome";
-	
-	public static FragmentNightHome newInstance(){
-		FragmentNightHome frag = new FragmentNightHome();
-		return frag;
-	}
+    public static final String TAG = "FragmentNightHome";
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-	}
+    public static FragmentNightHome newInstance() {
+        FragmentNightHome frag = new FragmentNightHome();
+        return frag;
+    }
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View v = inflater.inflate(R.layout.fragment_night_home, container, false);
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.fragment_night_home, container, false);
         ButterKnife.inject(this, v);
-		return v;
-	}
+        return v;
+    }
 
-	@Override
-	public void onActivityCreated(Bundle savedInstanceState) {
-		super.onActivityCreated(savedInstanceState);
-		ContentResolver cr = getActivity().getContentResolver();
-		Uri uri = ContentUris.withAppendedId(DrinkCountEntry.CONTENT_URI, 1);
-		Cursor cursor = cr.query(uri, null, null, null, null);
-		Log.d(TAG, "TEST");
-	}
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        ContentResolver cr = getActivity().getContentResolver();
+        Uri uri = ContentUris.withAppendedId(DrinkCountEntry.CONTENT_URI, 1);
+        Cursor cursor = cr.query(uri, null, null, null, null);
+        Log.d(TAG, "TEST");
+    }
 
     @OnClick(R.id.night_btn_action)
-    public void onActionButtonClicked(){
-        
+    public void onActionButtonClicked() {
+
     }
 
 }

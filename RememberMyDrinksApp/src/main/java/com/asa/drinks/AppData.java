@@ -5,7 +5,10 @@ public class AppData {
 	public static final String INTENT_SMS_RECEIVED = "android.provider.Telephony.SMS_RECEIVED";
 	
 	public static final String CP_AUHTORITY = "com.asa.drinks.provider";
-	
+
+    public static final long GEOFENCE_DEFAULT_EXPIRATION = 640000 * 2; // Two days
+    public static final float GEOFENCE_DEFAULT_RADIUS = 50;
+
 	/**
 	 * These are the ids of the notifications used in the app. Use the following
 	 * standards:

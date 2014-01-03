@@ -3,7 +3,6 @@ package com.asa.drinks.ui.tab;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.IntentSender;
-import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.asa.drinks.AppData;
 import com.asa.drinks.R;
 import com.asa.drinks.model.TabGeofenceItem;
 import com.asa.drinks.services.TabGeofenceExitedService;
@@ -50,8 +50,8 @@ public class TabSetupGeofenceFragment extends AsaBaseFragment implements GoogleP
         GooglePlayServicesClient.OnConnectionFailedListener, OnAddGeofencesResultListener {
     public static final String TAG = "TabSetupGeofenceFragment";
 
-    public static final int DEFAULT_RADIUS = 5;
     public static final float DEFAULT_ZOOM = 16;
+    public static final int DEFAULT_CIRCLE_FILL_COLOR = 0x7300bfc0;
 
     private LocationClient mLocationClient;
     // Stores the PenCdingIntent used to request geofence monitoring
@@ -72,7 +72,7 @@ public class TabSetupGeofenceFragment extends AsaBaseFragment implements GoogleP
     private Marker mCurrentMarker;
     private LatLng mCurrentLatLng;
     private float mCurrentZoom = DEFAULT_ZOOM;
-    private int mCurrentRadius = DEFAULT_RADIUS;
+    private float mCurrentRadius = AppData.GEOFENCE_DEFAULT_RADIUS;
 
     private Handler mHandler = new Handler();
 
@@ -209,7 +209,8 @@ public class TabSetupGeofenceFragment extends AsaBaseFragment implements GoogleP
             mMap.clear();
         }
         CircleOptions circleOptions = new CircleOptions();
-        circleOptions.center(latlng).radius(radius).fillColor(Color.RED).strokeWidth(3);
+        getResources().getColor(R.color.action_button_blue);
+        circleOptions.center(latlng).radius(radius).fillColor(DEFAULT_CIRCLE_FILL_COLOR).strokeWidth(3);
         mCurrentCircle = mMap.addCircle(circleOptions);
 
         if (mCurrentMarkerOptions != null && clearMap) {
@@ -236,7 +237,7 @@ public class TabSetupGeofenceFragment extends AsaBaseFragment implements GoogleP
 
             @Override
             public void run() {
-                drawCircle(mCurrentLatLng, DEFAULT_RADIUS, false);
+                drawCircle(mCurrentLatLng, AppData.GEOFENCE_DEFAULT_RADIUS, false);
             }
         }, 1000);
     }
@@ -315,6 +316,17 @@ public class TabSetupGeofenceFragment extends AsaBaseFragment implements GoogleP
 
     @OnClick(R.id.tabs_btn_action)
     public void onOpenCloseTabClicked() {
+        if (mLocationClient == null || !mLocationClient.isConnected()) {
+            // TODO - inform user that they have to wait
+            return;
+        }
+        Location location = mLocationClient.getLastLocation();
+        if (location == null) {
+            // TODO - inform user that lcoation hasn't been found yet.
+            return;
+        }
+        TabGeofenceItem tabGeofenceItem = new TabGeofenceItem(location, mActivity.getApplicationContext());
+
     }
 
 }

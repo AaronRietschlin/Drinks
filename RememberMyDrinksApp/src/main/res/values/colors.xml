@@ -9,6 +9,7 @@
     <color name="action_button_blue">#00696D</color>
     <color name="action_button_blue_selected">#ff005458</color>
     <color name="bg_action_bar_blue">#ff00bfc0</color>
+    <color name="tabs_circle_radius_color">#00bfc0</color>
 
     <!-- Purple theme colors -->
     <color name="action_button_purple">#ff200a4a</color>
