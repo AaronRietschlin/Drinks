@@ -18,6 +18,6 @@ public class ActivityNight extends BaseItemActivity {
             addFragment(FragmentNightHome.newInstance(), FragmentNightHome.TAG, false, false);
         }
 
-        setTitle(R.string.drawer_list_night);
+        setActionBarTitle(R.string.drawer_list_night);
     }
 }

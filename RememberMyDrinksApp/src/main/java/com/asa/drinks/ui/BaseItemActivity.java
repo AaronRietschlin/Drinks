@@ -65,15 +65,13 @@ public class BaseItemActivity extends AsaBaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void setTitle(CharSequence title) {
-        super.setTitle(title);
+    public void setActionBarTitle(CharSequence title) {
+        setTitle(title);
         mDrawerUtils.setTitle(title);
     }
 
-    @Override
-    public void setTitle(int titleId) {
-        super.setTitle(titleId);
+    public void setActionBarTitle(int titleId) {
+        setTitle(titleId);
         mDrawerUtils.setTitle(titleId);
     }
 }

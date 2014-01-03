@@ -18,6 +18,6 @@ public class ActivityTab extends BaseItemActivity {
             addFragment(new TabSetupGeofenceFragment(), TabSetupGeofenceFragment.TAG, false, false);
         }
 
-        setTitle(R.string.drawer_list_tab);
+        setActionBarTitle(R.string.drawer_list_tab);
     }
 }
