@@ -1,5 +1,7 @@
 package com.asa.drinks.model;
 
+import android.content.ContentValues;
+
 public class DrinkNight extends BaseItem {
 
 	private double date;
@@ -30,4 +32,9 @@ public class DrinkNight extends BaseItem {
 		this.name = name;
 	}
 
+    @Override
+    public ContentValues toContentValues() {
+        // TODO - implement
+        return null;
+    }
 }

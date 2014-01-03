@@ -1,10 +1,10 @@
 package com.asa.drinks.model;
 
-public class BaseItem {
+public abstract class BaseItem implements DatabaseItem{
 
-	private int id;
-	private double latitude;
-	private double longitude;
+	protected int id;
+    protected double latitude;
+    protected double longitude;
 
 	public int getId() {
 		return id;

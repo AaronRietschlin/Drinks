@@ -1,5 +1,7 @@
 package com.asa.drinks.model;
 
+import android.content.ContentValues;
+
 public class DrinkCount extends BaseItem {
 
 	private long date;
@@ -39,4 +41,9 @@ public class DrinkCount extends BaseItem {
 		this.name = name;
 	}
 
+    @Override
+    public ContentValues toContentValues() {
+        // TODO - implement
+        return null;
+    }
 }

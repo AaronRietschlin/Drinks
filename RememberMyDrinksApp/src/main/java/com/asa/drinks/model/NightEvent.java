@@ -1,5 +1,6 @@
 package com.asa.drinks.model;
 
+import android.content.ContentValues;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -60,7 +61,13 @@ public class NightEvent extends BaseItem {
 		this.icon = icon;
 	}
 
-	public static enum Type implements Parcelable {
+    @Override
+    public ContentValues toContentValues() {
+        // TODO - implement
+        return null;
+    }
+
+    public static enum Type implements Parcelable {
 		SMS, CALL, EMAIL, HANGOUT, FALL, OTHER;
 
 		@Override

@@ -1,5 +1,7 @@
 package com.asa.drinks.model;
 
+import android.content.ContentValues;
+
 public class DrinkTab extends BaseItem {
 
 	private long date;
@@ -66,4 +68,9 @@ public class DrinkTab extends BaseItem {
 		this.drinkNightId = drinkNightId;
 	}
 
+    @Override
+    public ContentValues toContentValues() {
+        // TODO - implement
+        return null;
+    }
 }

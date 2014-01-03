@@ -1,23 +1,33 @@
 package com.asa.drinks.model;
 
+import android.content.ContentValues;
 import android.location.Location;
 
 import com.asa.drinks.AppData;
+import com.asa.drinks.model.contracts.DrinksContract;
 import com.google.android.gms.location.Geofence;
 
 /**
  * An item that is used to store the {@link Geofence} data. The docs recommend
  * creating your own item for this.
  */
-public class TabGeofenceItem {
-    public static final String TABLE = "tab_geofence_item";
+public class TabGeofenceItem extends BaseItem {
+    public static final String TAG = "tab_geofence_item";
+    public static final String GEOFENCE_UID = "geofence:";
 
-    private double latitude;
-    private double longitude;
     private float radius;
     private long expirationTime;
     private String geofenceId;
     private int intentFlag;
+    /**
+     * The time it will take to send the {@link Geofence#GEOFENCE_TRANSITION_DWELL}
+     */
+    private int loiteringDelay;
+    /**
+     * The "responsiveness" of when the notification will be sent. Defaults to 0. Higher makes it more
+     * efficient. Recommended set to about 2 minutes (or 2000).
+     */
+    private int notificationResponsiveness;
 
     /**
      * Builds this item. Passing in 0 to the experationTime will set it to
@@ -64,8 +74,10 @@ public class TabGeofenceItem {
         } else if (transitionType == 0) {
             builder.setTransitionTypes(Geofence.GEOFENCE_TRANSITION_EXIT);
         }
-        builder.setExpirationDuration(expirationTime);
-        builder.setCircularRegion(latitude, longitude, radius);
+        // TODO - default the experiation time
+        // TODO - Default the notification responsiveness
+        builder.setExpirationDuration(expirationTime).setCircularRegion(latitude, longitude, radius)
+                .setLoiteringDelay(loiteringDelay).setNotificationResponsiveness(notificationResponsiveness);
         return builder.build();
     }
 
@@ -111,7 +123,7 @@ public class TabGeofenceItem {
 
     public void setGeofenceId() {
         // TODO - Compute an actual id
-        this.geofenceId = TABLE + ":" + 1;
+        this.geofenceId = GEOFENCE_UID + ":" + id;
     }
 
     public int getIntentFlag() {
@@ -130,6 +142,24 @@ public class TabGeofenceItem {
             return;
         }
     }
+
+    // TODO - build from cursor
+
+    @Override
+    public ContentValues toContentValues() {
+        ContentValues cv = new ContentValues();
+        cv.put(DrinksContract.TabGeofenceEntry._ID, id);
+        cv.put(DrinksContract.TabGeofenceEntry.COLUMN_LATITUDE, latitude);
+        cv.put(DrinksContract.TabGeofenceEntry.COLUMN_LONGITUDE, longitude);
+        cv.put(DrinksContract.TabGeofenceEntry.RADIUS, radius);
+        cv.put(DrinksContract.TabGeofenceEntry.EXPIRATION_TIME, expirationTime);
+        cv.put(DrinksContract.TabGeofenceEntry.GEOFENCE_ID, geofenceId);
+        cv.put(DrinksContract.TabGeofenceEntry.INTENT_FLAG, intentFlag);
+        cv.put(DrinksContract.TabGeofenceEntry.LOITERING_DELAY, loiteringDelay);
+        cv.put(DrinksContract.TabGeofenceEntry.NOTIFICATION_RESPONSIVENESS, notificationResponsiveness);
+        return cv;
+    }
+
 
     public static class TransitionType {
         public static final String EXIT = "exit";
