@@ -13,7 +13,6 @@ import com.asa.drinks.AppData;
 import com.asa.drinks.R;
 import com.crashlytics.android.Crashlytics;
 import com.google.android.gms.location.Geofence;
-import com.google.android.gms.location.LocationClient;
 
 public class TabGeofenceExitedService extends Service {
 	private final static String TAG = "TabGeofenceExitedService";
@@ -30,6 +29,7 @@ public class TabGeofenceExitedService extends Service {
 			throwException("Intent Service entered. INtent was null.");
 			return START_NOT_STICKY;
 		}
+
 		if (LocationClient.hasError(intent)) {
 			// TODO - test this. Force an error somehow.
 			Bundle extras = intent.getExtras();

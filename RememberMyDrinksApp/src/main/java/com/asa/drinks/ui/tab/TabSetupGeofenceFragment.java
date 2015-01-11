@@ -21,6 +21,7 @@ import com.asa.drinks.utils.LocationUtils.RequestType;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.LocationClient;
 import com.google.android.gms.location.LocationClient.OnAddGeofencesResultListener;
@@ -54,13 +55,13 @@ public class TabSetupGeofenceFragment extends AsaBaseFragment implements GoogleP
     public static final float DEFAULT_ZOOM = 16;
     public static final int DEFAULT_CIRCLE_FILL_COLOR = 0x7300bfc0;
 
-    private LocationClient mLocationClient;
     // Stores the PenCdingIntent used to request geofence monitoring
     private PendingIntent mGeofenceRequestIntent;
     private RequestType mRequestType;
     // Flag that indicates if a request is underway.
     private boolean mInProgress;
     private List<Geofence> mGeofenceList;
+    private GoogleApiClient mApiClient;
 
     // Views
     @InjectView(R.id.map_view)
